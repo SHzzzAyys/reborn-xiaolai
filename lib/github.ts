@@ -31,7 +31,8 @@ export async function getProjects(): Promise<Project[]> {
           "User-Agent": "shzzz-homepage",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        // 静态导出：默认在构建时抓取并固化
+        // 静态导出要求构建时固化；CI 为全新环境故每次都是最新数据。
+        // 本地若需刷新，构建前清 .next 缓存即可。
         cache: "force-cache",
       }
     );
