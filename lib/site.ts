@@ -25,8 +25,12 @@ export const SITE_URL =
 export const NAV = [
   { label: "项目", href: "/#projects" },
   { label: "写作", href: "/writing" },
+  { label: "Now", href: "/now" },
   { label: "关于", href: "/about" },
 ];
+
+// 只在页脚出现的次要链接（不挤主导航）
+export const FOOTER_LINKS = [{ label: "Uses", href: "/uses" }];
 
 // GitHub 语言配色（与 GitHub 一致）；未列出的语言用灰色兜底。
 export const LANG_COLOR: Record<string, string> = {

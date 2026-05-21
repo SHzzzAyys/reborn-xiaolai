@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NAV, SITE } from "@/lib/site";
+import { NAV, FOOTER_LINKS, SITE } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -14,7 +14,7 @@ export default function Footer() {
 
           <div className="flex gap-12 text-sm">
             <ul className="space-y-1.5">
-              {NAV.map((item) => (
+              {[...NAV, ...FOOTER_LINKS].map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
