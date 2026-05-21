@@ -80,6 +80,7 @@ export default async function PostPage({
           {post.date && (
             <time dateTime={post.date}>{fmt.format(new Date(post.date))}</time>
           )}
+          <span>约 {post.readingMinutes} 分钟</span>
           {post.tags.map((t) => (
             <span key={t}>#{t}</span>
           ))}

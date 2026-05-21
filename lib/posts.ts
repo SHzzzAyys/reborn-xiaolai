@@ -13,9 +13,18 @@ export type Post = {
   tags: string[];
   draft: boolean;
   content: string; // 去掉 front-matter 的 MDX 正文
+  readingMinutes: number; // 估算阅读时长（分钟）
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
+
+// 中英文混排的阅读时长估算：中文按 ~350 字/分，英文单词按 ~220 词/分，取和。
+function estimateReadingMinutes(text: string): number {
+  const cjk = (text.match(/[一-鿿]/g) || []).length;
+  const words = (text.match(/[A-Za-z0-9]+/g) || []).length;
+  const minutes = cjk / 350 + words / 220;
+  return Math.max(1, Math.round(minutes));
+}
 
 function readAll(): Post[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
@@ -35,6 +44,7 @@ function readAll(): Post[] {
         tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
         draft: Boolean(data.draft),
         content,
+        readingMinutes: estimateReadingMinutes(content),
       };
     });
 }
