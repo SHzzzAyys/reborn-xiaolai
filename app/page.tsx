@@ -5,6 +5,8 @@ import ProjectCard from "@/components/ProjectCard";
 
 export default async function Home() {
   const projects = await getProjects();
+  const pinned = projects.filter((p) => p.pinned);
+  const rest = projects.filter((p) => !p.pinned);
   return (
     <div className="mx-auto max-w-3xl px-5">
       {/* Hero with real GitHub avatar */}
@@ -55,16 +57,31 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Projects, grouped by theme */}
+      {/* Projects */}
       <section id="projects" className="scroll-mt-20 border-t border-line py-12">
         <div className="mb-8 flex items-baseline justify-between">
           <h2 className="font-serif text-2xl">项目</h2>
-          <span className="text-sm text-muted">精选原创仓库</span>
+          <span className="text-sm text-muted">原创仓库，自动同步自 GitHub</span>
         </div>
 
+        {/* 精选：置顶项目，单列大卡片，视觉上高于下方分类 */}
+        {pinned.length > 0 && (
+          <div className="mb-12">
+            <h3 className="mb-4 text-xs uppercase tracking-widest text-accent">
+              精选
+            </h3>
+            <div className="grid gap-4">
+              {pinned.map((p) => (
+                <ProjectCard key={p.name} project={p} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 其余项目按分类排列（排除已在精选区出现的） */}
         <div className="space-y-10">
           {CATEGORIES.map((cat) => {
-            const items = projects.filter((p) => p.category === cat);
+            const items = rest.filter((p) => p.category === cat);
             if (items.length === 0) return null;
             return (
               <div key={cat}>

@@ -49,7 +49,17 @@ export type Project = {
   category: string;
   stars?: number;
   updated?: string;
+  pinned?: boolean;
+  homepage?: string; // 有在线 demo 时（GitHub repo 的 homepage 字段）
+  readmeExcerpt?: string; // 仅精选项目：从 README 抽的首段摘要
 };
+
+// 精选置顶：这里列的仓库会出现在「精选」区，按本数组顺序排在最前。
+// 留空则全部走自动排序（按最近 push 倒序）。
+export const PINNED: string[] = ["frictionlog", "inversion", "para-prot-signal"];
+
+// 可选：覆盖个别精选仓库的 README 摘要（README 首段不适合直接展示时）。
+export const README_EXCERPT_OVERRIDE: Record<string, string> = {};
 
 // 分类顺序。未被 CATEGORY_OVERRIDE 命中的仓库归入最后的「更多」。
 export const CATEGORIES = [
