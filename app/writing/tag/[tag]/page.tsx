@@ -5,8 +5,10 @@ import { getAllTags, getPostsByTag } from "@/lib/posts";
 
 export const dynamicParams = false;
 
+// 返回原始 tag（不 encode），让静态导出写出 UTF-8 目录名（如 建站/），
+// 而非字面的 %E5%.. 目录——后者会让托管层解码后匹配不到而 404。
 export function generateStaticParams() {
-  return getAllTags().map(({ tag }) => ({ tag: encodeURIComponent(tag) }));
+  return getAllTags().map(({ tag }) => ({ tag }));
 }
 
 export async function generateMetadata({
@@ -15,12 +17,12 @@ export async function generateMetadata({
   params: Promise<{ tag: string }>;
 }): Promise<Metadata> {
   const { tag } = await params;
-  const name = decodeURIComponent(tag);
+  const enc = encodeURIComponent(tag);
   return {
-    title: `标签：${name}`,
-    description: `标记为「${name}」的文章。`,
-    alternates: { canonical: `/writing/tag/${tag}` },
-    openGraph: { title: `标签：${name} — SHzzz`, url: `/writing/tag/${tag}` },
+    title: `标签：${tag}`,
+    description: `标记为「${tag}」的文章。`,
+    alternates: { canonical: `/writing/tag/${enc}` },
+    openGraph: { title: `标签：${tag} — SHzzz`, url: `/writing/tag/${enc}` },
   };
 }
 
@@ -36,8 +38,7 @@ export default async function TagPage({
   params: Promise<{ tag: string }>;
 }) {
   const { tag } = await params;
-  const name = decodeURIComponent(tag);
-  const posts = getPostsByTag(name);
+  const posts = getPostsByTag(tag);
   if (posts.length === 0) notFound();
 
   return (
@@ -50,7 +51,7 @@ export default async function TagPage({
           ← 全部文章
         </Link>
         <h1 className="mt-6 font-serif text-4xl tracking-tight">
-          #{name}
+          #{tag}
         </h1>
         <p className="mt-2 text-sm text-muted">{posts.length} 篇</p>
       </header>
