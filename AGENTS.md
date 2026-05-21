@@ -51,6 +51,12 @@ Next.js 16 + React 19 + Tailwind v4，**静态导出**（`output: 'export'`）�
 3. 正文写 Markdown。本地预览：`npm run dev`（dev 显示草稿）。
 4. 发布：`draft: false` → `git add content/posts/ && git commit && git push`。约 1 分钟自动上线，同时进 `/writing`、`/feed.xml`、`sitemap.xml`。
 
+正文增强（已内置，直接用）：
+- **代码高亮**：写带语言标注的围栏代码块（``` ```python ```），自动 shiki 高亮、明暗双主题。
+- **配图**：图片放 `public/images/`，正文写 `![图注文字](/images/你的图.png)`，渲染成带边框圆角的 `<figure>`，alt 文字作图注。
+- **标签**：front-matter 的 `tags` 会自动生成 `/writing/tag/<标签>` 筛选页（中文标签也支持）。
+- **阅读时长**：自动按字数估算，无需手动写。
+
 ## 部署 & 构建
 
 - **CI 自动部署**：push 到 `main` → `deploy.yml` 用 `NEXT_PUBLIC_SITE_URL=https://shzzz.pages.dev` 构建（**不设** `GITHUB_PAGES`，即根路径无 basePath），再用 `cloudflare/wrangler-action` 部署 `out/`。所需 secrets（`CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN`）已配在仓库。
