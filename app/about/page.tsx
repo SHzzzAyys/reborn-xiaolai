@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { getProjects } from "@/lib/github";
 
-export const metadata = { title: "关于 — SHzzz" };
+export const metadata: Metadata = {
+  title: "关于",
+  description: `关于 ${SITE.name}：${SITE.bio}。${SITE.tagline}`,
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: `关于 — ${SITE.name}`,
+    description: SITE.tagline,
+    url: "/about",
+  },
+};
 
 export default async function AboutPage() {
   const projects = await getProjects();

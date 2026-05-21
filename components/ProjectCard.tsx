@@ -7,13 +7,14 @@ export default function ProjectCard({ project }: { project: Project }) {
       href={project.href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={`${project.name}，在 GitHub 上查看`}
       className="group flex flex-col rounded-md border border-line bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-accent"
     >
       <div className="flex items-center justify-between">
         <h3 className="font-serif text-lg group-hover:text-accent">
           {project.name}
         </h3>
-        <span className="text-muted transition-colors group-hover:text-accent">
+        <span aria-hidden className="text-muted transition-colors group-hover:text-accent">
           ↗
         </span>
       </div>

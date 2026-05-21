@@ -16,6 +16,12 @@ export const SITE = {
   socials: [{ label: "GitHub", href: "https://github.com/SHzzzAyys" }],
 };
 
+// 站点的「绝对 URL 根」—— OG/canonical/sitemap/RSS 都要用，必须包含 basePath。
+// 绑自定义域名后只需把环境变量 NEXT_PUBLIC_SITE_URL 改成新域名（同时去掉 next.config 的 basePath）。
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://shzzzayys.github.io/shzzz-homepage";
+
 export const NAV = [
   { label: "项目", href: "/#projects" },
   { label: "关于", href: "/about" },

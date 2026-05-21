@@ -21,7 +21,7 @@ export default function Header() {
         </Link>
 
         {/* desktop nav */}
-        <nav className="hidden items-center gap-6 text-sm md:flex">
+        <nav aria-label="主导航" className="hidden items-center gap-6 text-sm md:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -58,7 +58,7 @@ export default function Header() {
 
       {/* mobile menu */}
       {open && (
-        <nav className="border-t border-line bg-background md:hidden">
+        <nav aria-label="移动端导航" className="border-t border-line bg-background md:hidden">
           <ul className="mx-auto max-w-3xl px-5 py-2">
             {[...NAV, { label: "GitHub", href: SITE.github }].map((item, i) => (
               <li key={item.href} className="border-b border-line/60 last:border-0">

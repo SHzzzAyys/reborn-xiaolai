@@ -66,3 +66,25 @@ a {
 .link-underline:hover {
   background-size: 100% 1px;
 }
+
+/* 全站 a11y：键盘聚焦时给出明确的焦点环（暖色调里浏览器默认蓝环不够显眼） */
+:where(a, button, [role="button"], input, textarea, select):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 尊重系统「减少动效」偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
