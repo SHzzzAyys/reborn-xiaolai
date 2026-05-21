@@ -88,3 +88,36 @@ a {
     scroll-behavior: auto;
   }
 }
+
+/* ---- 文章正文里的代码（.mdx 作用域）---- */
+/* 行内代码：药丸样式（排除代码块里的 code） */
+.mdx :not(pre) > code {
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+  padding: 0.1em 0.4em;
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+/* 代码块容器（rehype-pretty-code 输出的 pre.shiki） */
+.mdx pre {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.mdx pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+/* 明暗双主题：默认浅色，.dark 下切到 shiki 深色变量 */
+.mdx .shiki,
+.mdx .shiki span {
+  color: var(--shiki-light);
+}
+.dark .mdx .shiki,
+.dark .mdx .shiki span {
+  color: var(--shiki-dark);
+}

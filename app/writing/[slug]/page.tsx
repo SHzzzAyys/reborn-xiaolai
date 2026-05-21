@@ -2,8 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import rehypePrettyCode from "rehype-pretty-code";
 import { getPost, getPosts } from "@/lib/posts";
 import { mdxComponents } from "@/components/mdx";
+
+// 代码高亮：明暗双主题，由 .dark 类切换（见 globals.css 的 .shiki 规则）
+const mdxOptions = {
+  mdxOptions: {
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        { theme: { light: "github-light", dark: "github-dark" }, keepBackground: false },
+      ],
+    ] as never,
+  },
+};
 
 // 静态导出必须：穷举所有 slug，且不允许动态参数
 export const dynamicParams = false;
@@ -73,8 +86,12 @@ export default async function PostPage({
         </div>
       </header>
 
-      <div className="text-[1.05rem]">
-        <MDXRemote source={post.content} components={mdxComponents} />
+      <div className="mdx text-[1.05rem]">
+        <MDXRemote
+          source={post.content}
+          components={mdxComponents}
+          options={mdxOptions}
+        />
       </div>
     </article>
   );

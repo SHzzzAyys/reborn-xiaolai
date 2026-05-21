@@ -24,17 +24,7 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  code: (props) => (
-    <code
-      className="rounded bg-foreground/8 px-1.5 py-0.5 font-mono text-[0.85em]"
-      {...props}
-    />
-  ),
-  pre: (props) => (
-    <pre
-      className="my-6 overflow-x-auto rounded-md border border-line bg-card p-4 text-sm"
-      {...props}
-    />
-  ),
+  // 代码块（pre/code）交给 rehype-pretty-code 输出的 .shiki，
+  // 行内 code 与代码块容器样式统一在 globals.css 的 .mdx 作用域里处理。
   hr: () => <hr className="my-10 border-line" />,
 };
