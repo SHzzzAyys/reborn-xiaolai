@@ -22,13 +22,16 @@ export default function ProjectCard({ project }: { project: Project }) {
         {project.desc}
       </p>
 
-      <div className="mt-4 flex items-center gap-2 text-xs text-muted">
-        <span
-          className="inline-block h-2.5 w-2.5 rounded-full"
-          style={{ background: LANG_COLOR[project.lang] ?? "#888" }}
-          aria-hidden
-        />
-        {project.lang}
+      <div className="mt-4 flex items-center gap-3 text-xs text-muted">
+        <span className="flex items-center gap-1.5">
+          <span
+            className="inline-block h-2.5 w-2.5 rounded-full"
+            style={{ background: LANG_COLOR[project.lang] ?? "#888" }}
+            aria-hidden
+          />
+          {project.lang}
+        </span>
+        {project.stars ? <span>★ {project.stars}</span> : null}
       </div>
     </a>
   );

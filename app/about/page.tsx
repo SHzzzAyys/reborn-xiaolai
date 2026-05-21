@@ -1,9 +1,13 @@
-import { SITE, PROJECTS } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import { getProjects } from "@/lib/github";
 
 export const metadata = { title: "关于 — SHzzz" };
 
-export default function AboutPage() {
-  const stacks = Array.from(new Set(PROJECTS.map((p) => p.lang)));
+export default async function AboutPage() {
+  const projects = await getProjects();
+  const stacks = Array.from(
+    new Set(projects.map((p) => p.lang).filter((l) => l && l !== "—"))
+  );
 
   return (
     <div className="mx-auto max-w-3xl px-5 pt-16">

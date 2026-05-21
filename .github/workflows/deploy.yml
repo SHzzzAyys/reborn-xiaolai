@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # 每天 00:30 UTC 重建一次，自动同步 GitHub 上新增/改动的仓库信息
+    - cron: "30 0 * * *"
 
 permissions:
   contents: read
@@ -28,6 +31,8 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
+          # 用 Actions 自带 token 鉴权 GitHub API（5000/h），避免匿名限流
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

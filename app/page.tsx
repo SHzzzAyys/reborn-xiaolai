@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { SITE, PROJECTS, CATEGORIES } from "@/lib/site";
+import { SITE, CATEGORIES } from "@/lib/site";
+import { getProjects } from "@/lib/github";
 import ProjectCard from "@/components/ProjectCard";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjects();
   return (
     <div className="mx-auto max-w-3xl px-5">
       {/* Hero with real GitHub avatar */}
@@ -39,7 +41,7 @@ export default function Home() {
 
         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
           <span>
-            <span className="text-foreground">{SITE.repoCount}</span> 个公开仓库
+            <span className="text-foreground">{projects.length}</span> 个原创项目
           </span>
           <span>{SITE.joined} 年加入 GitHub</span>
           <a
@@ -62,7 +64,7 @@ export default function Home() {
 
         <div className="space-y-10">
           {CATEGORIES.map((cat) => {
-            const items = PROJECTS.filter((p) => p.category === cat);
+            const items = projects.filter((p) => p.category === cat);
             if (items.length === 0) return null;
             return (
               <div key={cat}>
