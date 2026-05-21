@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 // https://<user>.github.io/<repo>/ so we need a basePath/assetPrefix.
 // The deploy workflow sets GITHUB_PAGES=true; local `next dev` keeps them empty.
 const isGithubPages = process.env.GITHUB_PAGES === "true";
-const repo = "reborn-xiaolai";
+const repo = "shzzz-homepage";
 
 const nextConfig: NextConfig = {
   output: "export",

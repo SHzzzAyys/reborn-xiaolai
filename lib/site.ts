@@ -98,10 +98,10 @@ export const PROJECTS: Project[] = [
     category: "应用 / 实验",
   },
   {
-    name: "reborn-xiaolai",
+    name: "shzzz-homepage",
     lang: "TypeScript",
     desc: "这个站点本身 —— Next.js + Tailwind 的个人主页，静态部署到 GitHub Pages。",
-    href: "https://github.com/SHzzzAyys/reborn-xiaolai",
+    href: "https://github.com/SHzzzAyys/shzzz-homepage",
     category: "应用 / 实验",
   },
 ];
