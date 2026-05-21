@@ -36,12 +36,16 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/",
-    // 文件约定 app/opengraph-image.tsx 会自动挂上 og:image，无需在此显式列。
+    // 用带 .png 扩展名的静态图：GitHub Pages 才会以 image/png 提供（无扩展名的
+    // 文件约定路由会被当成 application/octet-stream，社交抓取器会拒绝）。
+    // 这张图由 next/og 生成后固化在 public/og.png，要改设计见 git 历史里的 opengraph-image.tsx。
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: title }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };
