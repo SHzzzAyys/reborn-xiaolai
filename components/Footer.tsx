@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-1 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:justify-between">
-          <span>© {SITE.year} Reborn. A template inspired by lixiaolai.com.</span>
+          <span>© {SITE.year} Reborn · 受 lixiaolai.com 启发的个人主页模板</span>
           <span>{SITE.icp}</span>
         </div>
       </div>

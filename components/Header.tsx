@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { NAV, SITE } from "@/lib/site";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -34,26 +35,30 @@ export default function Header() {
             href="/login"
             className="rounded-full border border-foreground/15 px-3.5 py-1.5 text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
-            Sign in
+            登录
           </Link>
+          <ThemeToggle />
         </nav>
 
-        {/* mobile toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-9 w-9 items-center justify-center md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span className="text-xl leading-none">{open ? "×" : "≡"}</span>
-        </button>
+        {/* mobile controls */}
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-9 w-9 items-center justify-center"
+            aria-label="切换菜单"
+            aria-expanded={open}
+          >
+            <span className="text-xl leading-none">{open ? "×" : "≡"}</span>
+          </button>
+        </div>
       </div>
 
       {/* mobile menu */}
       {open && (
         <nav className="border-t border-line bg-background md:hidden">
           <ul className="mx-auto max-w-3xl px-5 py-2">
-            {[...NAV, { label: "Sign in", href: "/login" }].map((item, i) => (
+            {[...NAV, { label: "登录", href: "/login" }].map((item, i) => (
               <li key={item.href} className="border-b border-line/60 last:border-0">
                 <Link
                   href={item.href}

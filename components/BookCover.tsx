@@ -1,12 +1,24 @@
 import type { Book } from "@/lib/site";
 
-// Deterministic hue from the title so each cover keeps a stable, distinct color.
-function hueFromTitle(title: string): number {
+// A curated palette of cover-like jewel tones — brighter and more cohesive
+// than a raw hash-to-hue. Each entry is a [from, to] diagonal gradient.
+const PALETTE: [string, string][] = [
+  ["#1f6f6b", "#0f3f3d"], // teal
+  ["#8a2f3b", "#5a1c25"], // burgundy
+  ["#2b4a8a", "#16294f"], // royal blue
+  ["#3f6b35", "#23401d"], // forest
+  ["#7a3f86", "#48214f"], // plum
+  ["#b45a2b", "#7a3315"], // rust
+  ["#4a5568", "#262c38"], // slate
+  ["#9a6b1f", "#5f3f10"], // ochre
+];
+
+function paletteIndex(title: string): number {
   let h = 0;
   for (let i = 0; i < title.length; i++) {
-    h = (h * 31 + title.charCodeAt(i)) % 360;
+    h = (h * 31 + title.charCodeAt(i)) % 100000;
   }
-  return h;
+  return h % PALETTE.length;
 }
 
 export default function BookCover({
@@ -16,12 +28,9 @@ export default function BookCover({
   book: Book;
   className?: string;
 }) {
-  const hue = hueFromTitle(book.title);
-  // two-stop diagonal gradient + a darker "spine" on the left edge
+  const [from, to] = PALETTE[paletteIndex(book.title)];
   const style = {
-    background: `linear-gradient(135deg,
-      hsl(${hue} 38% 32%) 0%,
-      hsl(${(hue + 28) % 360} 42% 22%) 100%)`,
+    background: `linear-gradient(135deg, ${from} 0%, ${to} 100%)`,
   };
 
   return (

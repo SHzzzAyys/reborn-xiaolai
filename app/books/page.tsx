@@ -1,16 +1,15 @@
 import { BOOKS } from "@/lib/site";
 import BookCover from "@/components/BookCover";
 
-export const metadata = { title: "Books — Reborn" };
+export const metadata = { title: "著作 — Reborn" };
 
 export default function BooksPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 pt-16">
       <header className="mb-10">
-        <h1 className="font-serif text-4xl tracking-tight">Books</h1>
+        <h1 className="font-serif text-4xl tracking-tight">著作</h1>
         <p className="mt-3 max-w-xl text-muted">
-          Fourteen volumes, in rotation — across Chinese and English, on AI,
-          investing, language and the craft of learning.
+          十四卷，轮替展示——横跨中英文，涉及人工智能、投资、语言与学习的手艺。
         </p>
       </header>
 

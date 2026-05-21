@@ -1,21 +1,21 @@
-export const metadata = { title: "News — Reborn" };
+export const metadata = { title: "动态 — Reborn" };
 
 const NEWS = [
   {
-    date: "May 2026",
-    text: "Shipped a major rewrite of the homepage, now reborn with AI.",
+    date: "2026年5月",
+    text: "完成首页的一次大改版，借 AI 重生。",
   },
   {
-    date: "Apr 2026",
-    text: "Started building vmark.app — a tool for reading slowly at scale.",
+    date: "2026年4月",
+    text: "开始开发 vmark.app —— 一个让慢读规模化的工具。",
   },
   {
-    date: "Mar 2026",
-    text: "Community crossed 12,000 members and 200 archived essays.",
+    date: "2026年3月",
+    text: "社区成员突破 12,000，归档随笔达 200 篇。",
   },
   {
-    date: "Jan 2026",
-    text: "Began a year-long experiment: two essays a week, no exceptions.",
+    date: "2026年1月",
+    text: "开启一项为期一年的实验：每周两篇，绝不例外。",
   },
 ];
 
@@ -23,9 +23,9 @@ export default function NewsPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 pt-16">
       <header className="mb-10">
-        <h1 className="font-serif text-4xl tracking-tight">News</h1>
+        <h1 className="font-serif text-4xl tracking-tight">动态</h1>
         <p className="mt-3 max-w-xl text-muted">
-          A running log of what changed and what is being built.
+          一份关于「改了什么、在做什么」的流水记录。
         </p>
       </header>
 

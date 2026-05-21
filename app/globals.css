@@ -1,12 +1,25 @@
 @import "tailwindcss";
 
+/* class-based dark mode: toggled by adding `.dark` on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* warm off-white paper background, near-black ink */
   --background: #fcfcfa;
   --foreground: #16140f;
   --muted: #6b675e;
   --line: #e7e4dc;
-  --accent: #8a5a2b;
+  --accent: #a8662b;
+  --card: #ffffff;
+}
+
+.dark {
+  --background: #141310;
+  --foreground: #ece9e0;
+  --muted: #9a958a;
+  --line: #2b2823;
+  --accent: #e0a35c;
+  --card: #1d1b16;
 }
 
 @theme inline {
@@ -15,8 +28,11 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --color-card: var(--card);
+  --font-sans: var(--font-inter), "PingFang SC", "Microsoft YaHei",
+    ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), "Noto Serif SC", "Songti SC", "STSong",
+    ui-serif, Georgia, serif;
 }
 
 * {
@@ -32,6 +48,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {

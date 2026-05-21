@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { ARTICLES } from "@/lib/site";
 
-export const metadata = { title: "Articles — Reborn" };
+export const metadata = { title: "文章 — Reborn" };
 
 export default function ArticlesPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 pt-16">
       <header className="mb-10">
-        <h1 className="font-serif text-4xl tracking-tight">Articles</h1>
+        <h1 className="font-serif text-4xl tracking-tight">文章</h1>
         <p className="mt-3 max-w-xl text-muted">
-          A commonplace book, kept in public. Roughly two pieces a week since
-          2018 — on learning, money, language and attention.
+          一本公开记录的读书笔记本。自 2018 年起每周约两篇——关于学习、金钱、语言与注意力。
         </p>
       </header>
 
