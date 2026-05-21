@@ -44,6 +44,8 @@ export async function generateMetadata({
       url: `/writing/${slug}`,
       publishedTime: post.date || undefined,
       tags: post.tags,
+      // 统一用站点级 OG 图（不为每篇单独生成，避免打包中文字体）
+      images: [{ url: "/og.png", width: 1200, height: 630 }],
     },
   };
 }
