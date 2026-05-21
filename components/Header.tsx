@@ -13,10 +13,10 @@ export default function Header() {
       <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
         <Link href="/" className="group flex items-baseline gap-2">
           <span className="font-serif text-lg font-medium tracking-tight">
-            Reborn<span className="text-accent">{SITE.handle}</span>
+            {SITE.name}
           </span>
           <span className="hidden text-xs text-muted sm:inline">
-            — {SITE.date}
+            {SITE.bio}
           </span>
         </Link>
 
@@ -31,12 +31,14 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/login"
+          <a
+            href={SITE.github}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-foreground/15 px-3.5 py-1.5 text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
-            登录
-          </Link>
+            GitHub
+          </a>
           <ThemeToggle />
         </nav>
 
@@ -58,7 +60,7 @@ export default function Header() {
       {open && (
         <nav className="border-t border-line bg-background md:hidden">
           <ul className="mx-auto max-w-3xl px-5 py-2">
-            {[...NAV, { label: "登录", href: "/login" }].map((item, i) => (
+            {[...NAV, { label: "GitHub", href: SITE.github }].map((item, i) => (
               <li key={item.href} className="border-b border-line/60 last:border-0">
                 <Link
                   href={item.href}

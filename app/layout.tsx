@@ -18,9 +18,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Reborn — 终身学习者，借 AI 重生",
+  title: "SHzzz — AI 爱好者 · 生物学博士",
   description:
-    "一位作家、老师与投资人的个人主页。关于学习、金钱、语言与注意力的笔记、书与课程。",
+    "SHzzz 的个人主页：生物学博士、AI 爱好者，在科研与 AI Agent 的交叉处做工具。",
 };
 
 // Runs before paint to apply the saved/system theme and avoid a flash.

@@ -1,129 +1,98 @@
 import Link from "next/link";
-import { ARTICLES, BOOKS, SITE } from "@/lib/site";
-import BookCover from "@/components/BookCover";
+import { SITE, PROJECTS, CATEGORIES } from "@/lib/site";
+import ProjectCard from "@/components/ProjectCard";
 
 export default function Home() {
   return (
     <div className="mx-auto max-w-3xl px-5">
-      {/* Hero with author avatar */}
-      <section className="pt-16 pb-14 sm:pt-24">
-        <div className="mb-8 flex items-center gap-4">
-          <div
-            className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full font-serif text-2xl text-white shadow-sm ring-1 ring-black/10"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--accent) 0%, #5a1c25 100%)",
-            }}
-            aria-hidden
-          >
-            笑
-          </div>
+      {/* Hero with real GitHub avatar */}
+      <section className="pt-16 pb-12 sm:pt-24">
+        <div className="mb-8 flex items-center gap-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={SITE.avatar}
+            alt={SITE.name}
+            width={80}
+            height={80}
+            className="h-20 w-20 shrink-0 rounded-full object-cover shadow-sm ring-1 ring-black/10"
+          />
           <div>
-            <p className="font-serif text-lg">
-              Reborn<span className="text-accent">{SITE.handle}</span>
-            </p>
-            <p className="text-sm text-muted">
-              {SITE.locations.join(" · ")} · {SITE.date}
-            </p>
+            <h1 className="font-serif text-3xl tracking-tight sm:text-4xl">
+              {SITE.name}
+            </h1>
+            <p className="mt-1 text-sm text-muted">{SITE.bio}</p>
+            <a
+              href={SITE.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline mt-1 inline-block text-sm text-accent"
+            >
+              {SITE.handle}
+            </a>
           </div>
         </div>
 
-        <h1 className="font-serif text-4xl leading-[1.15] tracking-tight sm:text-6xl">
-          终身学习者，借{" "}
-          <span className="italic text-accent">AI</span> 重生。
-        </h1>
-        <p className="mt-6 max-w-xl text-lg text-muted">
-          作家、老师、投资人。十余年来关于学习、金钱、语言与注意力的笔记、书与课程。
+        <p className="max-w-xl font-serif text-2xl leading-snug sm:text-3xl">
+          {SITE.tagline}
         </p>
+        <p className="mt-4 max-w-xl text-muted">{SITE.blurb}</p>
+
         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-          <span>2004 年出版第一本书。</span>
-          <span>自 2018 年起每周约 2 篇。</span>
-          <span className="text-foreground">今年已发布 29 篇。</span>
+          <span>
+            <span className="text-foreground">{SITE.repoCount}</span> 个公开仓库
+          </span>
+          <span>{SITE.joined} 年加入 GitHub</span>
+          <a
+            href={SITE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline text-foreground"
+          >
+            在 GitHub 上关注我 →
+          </a>
         </div>
       </section>
 
-      {/* Articles */}
-      <section className="border-t border-line py-12">
-        <div className="mb-7 flex items-baseline justify-between">
-          <h2 className="font-serif text-2xl">文章</h2>
-          <Link
-            href="/articles"
-            className="link-underline text-sm text-muted hover:text-foreground"
-          >
-            公开记录的读书笔记本 →
-          </Link>
+      {/* Projects, grouped by theme */}
+      <section id="projects" className="scroll-mt-20 border-t border-line py-12">
+        <div className="mb-8 flex items-baseline justify-between">
+          <h2 className="font-serif text-2xl">项目</h2>
+          <span className="text-sm text-muted">精选原创仓库</span>
         </div>
-        <ul className="divide-y divide-line">
-          {ARTICLES.map((a) => (
-            <li key={a.title} className="group py-5">
-              <Link href="/articles" className="block">
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-serif text-xl group-hover:text-accent">
-                    {a.title}
-                  </h3>
-                  <time className="shrink-0 text-xs text-muted">{a.date}</time>
+
+        <div className="space-y-10">
+          {CATEGORIES.map((cat) => {
+            const items = PROJECTS.filter((p) => p.category === cat);
+            if (items.length === 0) return null;
+            return (
+              <div key={cat}>
+                <h3 className="mb-4 text-xs uppercase tracking-widest text-muted">
+                  {cat}
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {items.map((p) => (
+                    <ProjectCard key={p.name} project={p} />
+                  ))}
                 </div>
-                <p className="mt-1.5 text-sm text-muted">{a.blurb}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Books */}
-      <section className="border-t border-line py-12">
-        <div className="mb-7 flex items-baseline justify-between">
-          <h2 className="font-serif text-2xl">著作</h2>
-          <Link
-            href="/books"
-            className="link-underline text-sm text-muted hover:text-foreground"
-          >
-            14 卷，轮替展示 →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
-          {BOOKS.slice(0, 6).map((b) => (
-            <Link
-              key={b.title}
-              href="/books"
-              className="block transition-transform hover:-translate-y-1"
-            >
-              <BookCover book={b} />
-            </Link>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* Community */}
+      {/* About teaser */}
       <section className="border-t border-line py-12">
-        <h2 className="mb-7 font-serif text-2xl">社区</h2>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {[
-            { stat: "12,400", label: "社区成员，自 2019 年起活跃" },
-            { stat: "200+", label: "公开归档的随笔" },
-            { stat: "9", label: "种语言，由志愿者翻译" },
-          ].map((c) => (
-            <div key={c.label} className="rounded-sm border border-line p-5">
-              <p className="font-serif text-3xl">{c.stat}</p>
-              <p className="mt-1 text-sm text-muted">{c.label}</p>
-            </div>
-          ))}
-        </div>
-        <Link
-          href="/community"
-          className="link-underline mt-6 inline-block text-sm text-muted hover:text-foreground"
-        >
-          加入社区 →
-        </Link>
-      </section>
-
-      {/* Now / status */}
-      <section className="border-t border-line py-12">
-        <h2 className="mb-3 font-serif text-2xl">近况</h2>
+        <h2 className="mb-3 font-serif text-2xl">关于</h2>
         <p className="max-w-xl text-muted">
-          正在开发 <span className="text-foreground">vmark.app</span>，
-          并重写这个站点。在{SITE.locations[0]}慢读、公开写作、出声学习。
+          生物学博士在读，AI 重度爱好者。研究之外，我喜欢把 LLM 与 Agent
+          接进真实的工作流里。
         </p>
+        <Link
+          href="/about"
+          className="link-underline mt-4 inline-block text-sm text-foreground"
+        >
+          了解更多 →
+        </Link>
       </section>
     </div>
   );
