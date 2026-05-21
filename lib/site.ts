@@ -24,6 +24,7 @@ export const SITE_URL =
 
 export const NAV = [
   { label: "项目", href: "/#projects" },
+  { label: "写作", href: "/writing" },
   { label: "关于", href: "/about" },
 ];
 
