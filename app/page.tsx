@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ARTICLES, BOOKS, SITE } from "@/lib/site";
+import BookCover from "@/components/BookCover";
 
 export default function Home() {
   return (
@@ -65,14 +66,9 @@ export default function Home() {
             <Link
               key={b.title}
               href="/books"
-              className="group flex aspect-[3/4] flex-col justify-between rounded-sm border border-line bg-white/40 p-4 transition-colors hover:border-accent"
+              className="block transition-transform hover:-translate-y-1"
             >
-              <span className="text-[10px] uppercase tracking-widest text-muted">
-                {b.lang}
-              </span>
-              <span className="font-serif text-base leading-snug group-hover:text-accent">
-                {b.title}
-              </span>
+              <BookCover book={b} />
             </Link>
           ))}
         </div>

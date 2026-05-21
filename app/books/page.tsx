@@ -1,4 +1,5 @@
 import { BOOKS } from "@/lib/site";
+import BookCover from "@/components/BookCover";
 
 export const metadata = { title: "Books — Reborn" };
 
@@ -15,21 +16,9 @@ export default function BooksPage() {
 
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
         {BOOKS.map((b) => (
-          <div
-            key={b.title}
-            className="group flex flex-col rounded-sm border border-line bg-white/40 p-5 transition-colors hover:border-accent"
-          >
-            <div className="flex aspect-[3/4] flex-col justify-between">
-              <span className="text-[10px] uppercase tracking-widest text-muted">
-                {b.lang}
-              </span>
-              <span className="font-serif text-lg leading-snug group-hover:text-accent">
-                {b.title}
-              </span>
-            </div>
-            <p className="mt-4 border-t border-line pt-3 text-xs text-muted">
-              {b.note}
-            </p>
+          <div key={b.title} className="group">
+            <BookCover book={b} className="transition-transform group-hover:-translate-y-1" />
+            <p className="mt-3 text-xs text-muted">{b.note}</p>
           </div>
         ))}
       </div>
