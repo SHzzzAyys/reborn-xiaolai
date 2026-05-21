@@ -2,32 +2,59 @@
 
 import { useEffect, useState } from "react";
 
-export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+type Theme = "light" | "dark" | "system";
 
-  // sync initial state from the class set by the no-flash script
+const ORDER: Theme[] = ["light", "dark", "system"];
+const ICON: Record<Theme, string> = { light: "☀", dark: "☾", system: "◐" };
+const LABEL: Record<Theme, string> = {
+  light: "浅色",
+  dark: "深色",
+  system: "跟随系统",
+};
+
+function apply(theme: Theme) {
+  const sys = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const dark = theme === "dark" || (theme === "system" && sys);
+  document.documentElement.classList.toggle("dark", dark);
+}
+
+export default function ThemeToggle() {
+  const [theme, setTheme] = useState<Theme>("system");
+  const [mounted, setMounted] = useState(false);
+
+  // 挂载后读取已保存的偏好（避免 SSR/hydration 不一致）
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+    const saved = (localStorage.getItem("theme") as Theme) || "system";
+    setTheme(saved);
+    setMounted(true);
   }, []);
 
-  function toggle() {
-    const next = !dark;
-    setDark(next);
-    const root = document.documentElement;
-    root.classList.toggle("dark", next);
+  // system 模式下，实时跟随系统深浅色变化
+  useEffect(() => {
+    if (theme !== "system") return;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => apply("system");
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [theme]);
+
+  function cycle() {
+    const next = ORDER[(ORDER.indexOf(theme) + 1) % ORDER.length];
+    setTheme(next);
+    apply(next);
     try {
-      localStorage.setItem("theme", next ? "dark" : "light");
+      localStorage.setItem("theme", next);
     } catch {}
   }
 
   return (
     <button
-      onClick={toggle}
-      aria-label="切换深浅色"
-      title="切换深浅色"
+      onClick={cycle}
+      aria-label={`主题：${LABEL[theme]}（点击切换）`}
+      title={`主题：${LABEL[theme]}`}
       className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/15 text-sm transition-colors hover:bg-foreground hover:text-background"
     >
-      {dark ? "☀" : "☾"}
+      {mounted ? ICON[theme] : "◐"}
     </button>
   );
 }

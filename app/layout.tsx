@@ -53,8 +53,9 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// 在 paint 前应用保存/系统主题，避免闪烁
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
+// 在 paint 前应用保存/系统主题，避免闪烁。
+// 三态：'light' / 'dark' / 'system'（无值时按 system 处理）。
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var sys=matchMedia('(prefers-color-scheme: dark)').matches;var d=t==='dark'||((!t||t==='system')&&sys);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
 
 // JSON-LD Person — 让搜索引擎理解站点主体
 const personJsonLd = {
