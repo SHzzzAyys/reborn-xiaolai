@@ -52,16 +52,21 @@ export default function WritingPage() {
                 )}
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <span className="text-xs text-muted">约 {p.readingMinutes} 分钟</span>
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-line px-2 py-0.5 text-xs text-muted"
-                    >
-                      #{t}
-                    </span>
-                  ))}
                 </div>
               </Link>
+              {p.tags.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <Link
+                      key={t}
+                      href={`/writing/tag/${encodeURIComponent(t)}`}
+                      className="rounded-full border border-line px-2 py-0.5 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+                    >
+                      #{t}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </li>
           ))}
         </ul>

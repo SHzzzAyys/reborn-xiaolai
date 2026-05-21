@@ -82,7 +82,13 @@ export default async function PostPage({
           )}
           <span>约 {post.readingMinutes} 分钟</span>
           {post.tags.map((t) => (
-            <span key={t}>#{t}</span>
+            <Link
+              key={t}
+              href={`/writing/tag/${encodeURIComponent(t)}`}
+              className="link-underline hover:text-accent"
+            >
+              #{t}
+            </Link>
           ))}
         </div>
       </header>

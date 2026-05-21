@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getPosts } from "@/lib/posts";
+import { getPosts, getAllTags } from "@/lib/posts";
 
 // output: export 下，元数据路由必须声明为静态
 export const dynamic = "force-static";
@@ -23,5 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...posts];
+  const tags: MetadataRoute.Sitemap = getAllTags().map(({ tag }) => ({
+    url: `${SITE_URL}/writing/tag/${encodeURIComponent(tag)}/`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.4,
+  }));
+
+  return [...staticPages, ...posts, ...tags];
 }

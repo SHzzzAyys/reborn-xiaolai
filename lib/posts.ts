@@ -60,3 +60,18 @@ export function getPosts(): Post[] {
 export function getPost(slug: string): Post | undefined {
   return getPosts().find((p) => p.slug === slug);
 }
+
+// 所有标签（去重，按文章数倒序）
+export function getAllTags(): { tag: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const p of getPosts()) {
+    for (const t of p.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+}
+
+export function getPostsByTag(tag: string): Post[] {
+  return getPosts().filter((p) => p.tags.includes(tag));
+}
