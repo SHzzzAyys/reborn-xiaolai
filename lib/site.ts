@@ -71,9 +71,7 @@ export const CATEGORY_OVERRIDE: Record<string, string> = {
 
 // 可选：为个别仓库提供更顺口的中文描述，优先于 GitHub 上的原始描述。
 // 留空即直接使用 GitHub 仓库描述（这才是「自动同步」的默认行为）。
-export const DESC_OVERRIDE: Record<string, string> = {
-  "para-prot-signal": "寄生虫蛋白信号相关的小工具 / 可视化实验。",
-};
+export const DESC_OVERRIDE: Record<string, string> = {};
 
 // API 失败时的兜底列表（与上次手写内容一致）。
 export const FALLBACK_PROJECTS: Project[] = [
@@ -81,7 +79,7 @@ export const FALLBACK_PROJECTS: Project[] = [
   { name: "code-review-agent", lang: "Python", desc: "基于 Claude Agent SDK 的自动代码审查 Agent。", href: "https://github.com/SHzzzAyys/code-review-agent", category: "AI / Agent 工具" },
   { name: "task-recorder", lang: "Python", desc: "终端任务记录器，自动检测 Claude Code 会话。", href: "https://github.com/SHzzzAyys/task-recorder", category: "AI / Agent 工具" },
   { name: "toxo-phd-skills", lang: "Shell", desc: "弓形虫博士论文「科研完整性」Claude Code 插件。", href: "https://github.com/SHzzzAyys/toxo-phd-skills", category: "科研 / 生信" },
-  { name: "para-prot-signal", lang: "JavaScript", desc: "寄生虫蛋白信号相关的小工具 / 可视化实验。", href: "https://github.com/SHzzzAyys/para-prot-signal", category: "科研 / 生信" },
+  { name: "para-prot-signal", lang: "JavaScript", desc: "寄生虫科研文献日报：每日自动抓取 PubMed 上弓形虫 / 疟原虫相关最新论文，生成可浏览、可收藏、可导出的静态页面。", href: "https://github.com/SHzzzAyys/para-prot-signal", category: "科研 / 生信" },
   { name: "inversion", lang: "JavaScript", desc: "在你失败之前，先想象失败 —— AI 驱动的决策「事前验尸」桌面应用。", href: "https://github.com/SHzzzAyys/inversion", category: "应用 / 实验" },
   { name: "hondana", lang: "HTML", desc: "本棚 —— 个人 EPUB 书架与在线阅读器，日式极简风。", href: "https://github.com/SHzzzAyys/hondana", category: "应用 / 实验" },
   { name: "zhinan-test", lang: "HTML", desc: "直男翻译官 · 情侣测评 —— 一个轻松的互动小测验。", href: "https://github.com/SHzzzAyys/zhinan-test", category: "应用 / 实验" },
