@@ -61,7 +61,7 @@ export type Project = {
 
 // 精选置顶：这里列的仓库会出现在「精选」区，按本数组顺序排在最前。
 // 留空则全部走自动排序（按最近 push 倒序）。
-export const PINNED: string[] = ["frictionlog", "inversion", "para-prot-signal"];
+export const PINNED: string[] = ["frictionlog", "culture-radar", "inversion", "para-prot-signal"];
 
 // 可选：覆盖个别精选仓库的 README 摘要（README 首段不适合直接展示时）。
 export const README_EXCERPT_OVERRIDE: Record<string, string> = {};
@@ -99,6 +99,7 @@ export const CATEGORY_OVERRIDE: Record<string, string> = {
 export const DESC_OVERRIDE: Record<string, string> = {
   frictionlog: "FrictionLog — Claude Code 旁观工具，把 AI 纠错瞬间转化为 AGENTS.md 规则，v0.1.1 已发布 PyPI",
   "para-prot-signal": "寄生虫文献日报 — 每日自动抓取 PubMed 最新论文，DeepSeek 深度摘要，支持 Toxoplasma/Plasmodium",
+  "culture-radar": "CultureRadar — 美股 20 家公司文化拐点研究看板，yfinance 实时基本面 + 6M 价格走势 sparkline + 策展企业文化叙事，GitHub Actions 每日自动刷新",
 };
 
 // API 失败时的兜底列表（与上次手写内容一致）。
@@ -113,7 +114,7 @@ export const FALLBACK_PROJECTS: Project[] = [
   { name: "hondana", lang: "HTML", desc: "本棚 —— 个人 EPUB 书架与在线阅读器，日式极简风。", href: "https://github.com/SHzzzAyys/hondana", category: "应用 / 实验" },
   { name: "zhinan-test", lang: "HTML", desc: "直男翻译官 · 情侣测评 —— 一个轻松的互动小测验。", href: "https://github.com/SHzzzAyys/zhinan-test", category: "应用 / 实验" },
   { name: "shzzz-homepage", lang: "TypeScript", desc: "这个站点本身 —— Next.js + Tailwind 的个人主页，静态部署到 GitHub Pages。", href: "https://github.com/SHzzzAyys/shzzz-homepage", category: "应用 / 实验" },
-  { name: "culture-radar", lang: "HTML", desc: "CultureRadar — 追踪美股文化拐点信号的研究看板，含 SaaS + 半导体 20 家公司", href: "https://github.com/SHzzzAyys/culture-radar", category: "科研 / 生信" },
+  { name: "culture-radar", lang: "HTML", desc: "CultureRadar — 美股 20 家公司文化拐点研究看板，yfinance 实时基本面 + 6M 价格走势 sparkline + 策展企业文化叙事，GitHub Actions 每日自动刷新", href: "https://github.com/SHzzzAyys/culture-radar", category: "科研 / 生信", homepage: "https://shzzzayys.github.io/culture-radar/" },
   { name: "pushgate", lang: "JavaScript", desc: "PushGate — 自托管多渠道消息推送中转，支持 Bark / 钉钉 / 飞书 / 邮件 fan-out", href: "https://github.com/SHzzzAyys/pushgate", category: "应用 / 实验" },
   { name: "seed-engineering", lang: "TypeScript", desc: "种子轮工程化 — AI 辅助种子轮 DataRoom 系统，把融资从手艺活变成工程活", href: "https://github.com/SHzzzAyys/seed-engineering", category: "应用 / 实验" },
 ];
